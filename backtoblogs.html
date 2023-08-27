@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Back to all blogs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #750f9e;
+            color: white;
+            padding: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            margin-left: 20px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin-right: 20px;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover {
+            color: #24b7db;
+        }
+
+        .main-content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .morning-message {
+            background-color: floralwhite;
+            text-align: left;
+            padding: 25px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .morning-message h3 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .blog-container {
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            padding: 30px;
+            width: 700px;
+            margin: 20px auto;
+            position: absolute;
+            top: 180px;
+            left: 35px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-image {
+            border-radius: 20px;
+            overflow: hidden;
+            width: 100%;
+            height: 200px;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .blog-title {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .author-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .author-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .post-date {
+            font-size: 14px;
+            color: #666;
+            margin-left: 10px;
+        }
+
+        .blog-description {
+            margin-top: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .blog-container1 {
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            padding: 30px;
+            width: 700px;
+            margin: 20px auto;
+            position: absolute;
+            top: 370px;
+            left: 35px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-image1 {
+            border-radius: 20px;
+            overflow: hidden;
+            width: 100%;
+            height: 200px;
+        }
+
+        .blog-image1 img {
+            width: 100%;
+            height: auto;
+        }
+
+        .blog-title1 {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .author-info1 {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .author-avatar1 {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+
+        .author-avatar1 img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .author-name1 {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .post-date1 {
+            font-size: 14px;
+            color: #666;
+            margin-left: 10px;
+        }
+
+        .blog-description1 {
+            margin-top: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .blog-container2 {
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            padding: 30px;
+            width: 700px;
+            margin: 20px auto;
+            position: absolute;
+            top: 560px;
+            left: 35px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-image2 {
+            border-radius: 20px;
+            overflow: hidden;
+            width: 100%;
+            height: 200px;
+        }
+
+        .blog-image2 img {
+            width: 100%;
+            height: auto;
+        }
+
+        .blog-title2 {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .author-info2 {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .author-avatar2 {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+
+        .author-avatar2 img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .author-name2 {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .post-date2 {
+            font-size: 14px;
+            color: #666;
+            margin-left: 10px;
+        }
+
+        .blog-description2 {
+            margin-top: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        h1 {
+            position: absolute;
+            left: 40px;
+            top: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">Personal Blogging App</a>
+        <ul class="nav-links">
+            <li><a href="./profile.html">Profie</a></li>
+            <li><a href="./Login.html">Login</a></li>
+            
+        </ul>
+    </nav>
+    <div class="morning-message">
+       <a href="./index.html"> <h3>">"Back to All Blogs</h3></a>
+    </div>
+    <h1> ALL BLOGS</h1>
+    <div class="blog-container">
+
+        <h2 class="blog-title">Blog Title</h2>
+        <div class="author-info">
+            <div class="author-avatar">
+                <img src="author-avatar.jpg" alt="Author Avatar">
+            </div>
+            <div class="author-details">
+                <p class="author-name">Author Name</p>
+                <p class="post-date">August 27, 2023</p>
+            </div>
+        </div>
+        <p class="blog-description">This is the description of the blog post. It can be as long as you need it to be.
+        </p>
+    </div>
+    <div class="blog-container1">
+
+        <h2 class="blog-title1">Blog Title</h2>
+        <div class="author-info1">
+            <div class="author-avatar1">
+                <img src="author-avatar.jpg" alt="Author Avatar">
+            </div>
+            <div class="author-details1">
+                <p class="author-name1">Author Name</p>
+                <p class="post-date1">August 27, 2023</p>
+            </div>
+        </div>
+        <p class="blog-description1">This is the description of the blog post. It can be as long as you need it to be.
+        </p>
+    </div>
+    <div class="blog-container2">
+
+        <h2 class="blog-title2">Blog Title</h2>
+        <div class="author-info2">
+            <div class="author-avatar2">
+                <img src="author-avatar.jpg" alt="Author Avatar">
+            </div>
+            <div class="author-details2">
+                <p class="author-name2">Author Name</p>
+                <p class="post-date2">August 27, 2023</p>
+            </div>
+        </div>
+        <p class="blog-description2">This is the description of the blog post. It can be as long as you need it to be.
+        </p>
+    </div>
+
+</body>
+
+</html>

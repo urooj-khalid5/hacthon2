@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #750f9e;
+            color: white;
+            padding: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            margin-left: 20px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin-right: 20px;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover {
+            color: #24b7db;
+        }
+
+        .main-content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .Login-container {
+            background-color: white;
+            max-width: 400px;
+            margin: 130px auto;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .Login-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            position: absolute;
+            left: 40px;
+            top: 70px;
+        }
+
+        .Login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-input {
+            margin-bottom: 15px;
+            width: 250px;
+        }
+
+        .form-input input {
+            width: 250px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .form-input input[type="password"] {
+            font-family: inherit;
+        }
+
+        .form-actions {
+            width: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .form-actions button {
+            padding: 10px 20px;
+            background-color: #560c58cc;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .form-actions button:hover {
+            background-color: #4f0f52;
+        }
+        .form-input input:focus{
+            outline: none;
+            border-color: #4f0f52;
+            box-shadow: 0 0 3px rgb(105, 5, 100);
+        }
+    </style>
+    <title>Login</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">Personal Blogging App</a>
+        <ul class="nav-links">
+            <li><a href="./signup.html">SignUp</a></li>
+        </ul>
+    </nav>
+    <div class="Login-container">
+        <h2>Login </h2>
+        <form class="Login-form">
+            <div class="form-input">
+                <input type="email" placeholder="Email" name="email" required>
+            </div>
+            <div class="form-input">
+                <input type="password" placeholder="Password" name="password" required>
+            </div>
+            <div class="form-actions">
+                <button onclick="Login()">Login</button>
+                
+            </div>
+        </form>
+    </div>    
+        <!-- Add Firebase JavaScript SDK -->
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js"></script>
+        <script type="text/javascript">
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+    apiKey: "AIzaSyBXLAsW25U1pWO395m8BrdJDSKyNIr5Ifo",
+    authDomain: "hacthonproject-fe319.firebaseapp.com",
+    databaseURL: "https://hacthonproject-fe319-default-rtdb.firebaseio.com",
+    projectId: "hacthonproject-fe319",
+    storageBucket: "hacthonproject-fe319.appspot.com",
+    messagingSenderId: "1014200645705",
+    appId: "1:1014200645705:web:c5002e1f1d2e3376f56798",
+    measurementId: "G-5S1DVXRXDN"
+  };
+    
+    
+             firebase.initializeApp(firebaseConfig);
+    const database=firebase.database();
+    
+    const Login = () => {
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
+        let role = 'User'
+    
+        console.log(email, password)
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                let user = userCredential.user;
+                firebase.database().ref('users/' + user.uid).set({
+                    uid: user.uid,
+                    role: role,
+                    email: email,
+                    password: password
+                })
+                    .then(() => {
+                        const user = { email: email };
+                        sessionStorage.setItem('user', JSON.stringify(user));
+                        console.log('User created successfully.')
+                        window.location.href = './Dashboard.html'
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+            })
+            .catch((error) => {
+                let errorCode = error.code;
+                let errorMessage = error.message;
+                console.log(errorCode + ': ' + errorMessage)
+            });
+    }
+        </script>
+    
+</body>
+</html>
