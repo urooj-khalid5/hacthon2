@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <title>Signup</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Blogging App</title>
     <style>
-        * {
+         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -61,87 +61,64 @@
             padding: 0 20px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+
+        .login-name {
+            color: white;
+            font-weight: bold;
+            margin-left: 1200px;
+            cursor: pointer;
+            position: absolute;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
+        h2 {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 40px;
+            margin-left: 100px;
+        }
+
+        .dotted-line {
+            border-top: 1px dotted black;
         }
 
         .signup-container {
             background-color: white;
-            max-width: 400px;
-            margin: 70px auto;
-            padding: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin-left: 500px;
+            margin-top: 40px;
+            height: 350px
+        }
+
+        .signup-input {
+            width: 60%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #e6e2e2;
             border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(134, 42, 42, 0.1);
+            margin-left: 80px;
+            transition: border-color 0.3s ease-in-out;
         }
 
-        .signup-container h2 {
-            margin-bottom: 20px;
-            text-align: center;
-            position: absolute;
-            left: 40px;
-            top: 70px;
-        }
-
-        .signup-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .form-input {
-            margin-bottom: 15px;
-            width: 250px;
-        }
-
-        .form-input input {
-            width: 250px;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        .form-input input[type="password"] {
-            font-family: inherit;
-        }
-
-        .form-actions {
-            width: 100px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .form-actions button {
-            padding: 10px 20px;
-            background-color: #560c58cc;
+        .signup-button {
+            width: 30%;
+            padding: 10px;
+            background-color: rgb(87, 9, 231);
             color: white;
             border: none;
-            border-radius: 3px;
+            border-radius: 5px;
             cursor: pointer;
+            margin-left: 140px;
+            margin-top: 1px;
         }
 
-        .form-actions button:hover {
-            background-color: #4f0f52;
-        }
-
-        .form-input input:focus {
+        .signup-input:focus {
             outline: none;
-            border-color: #4f0f52;
-            box-shadow: 0 0 3px rgb(105, 5, 100);
+            border-color: rgb(87, 9, 231);
+            box-shadow: 0 0 3px rgb(87, 9, 231);
         }
     </style>
-    <title>Sign Up</title>
 </head>
 
 <body>
@@ -151,37 +128,21 @@
             <li><a href="./Login.html">Login</a></li>
         </ul>
     </nav>
+    <h2>Signup</h2>
+    <div class="dotted-line"></div>
     <div class="signup-container">
-        <h2>Sign Up</h2>
-        <form class="signup-form">
-            <div class="form-input">
-                <input type="text" placeholder="First Name" id="firstname" name="firstname" required>
-            </div>
-            <div class="form-input">
-                <input type="text" placeholder="Last Name" id="lastname" name="lastname" required>
-            </div>
-            <div class="form-input">
-                <input type="email" placeholder="Email" id="email" name="email" required>
-            </div>
-            <div class="form-input">
-                <input type="password" placeholder="Password" id="password" name="password" required>
-            </div>
-            <div class="form-input">
-                <input type="password" placeholder="Repeat Password" id="repeatpass" name="confirm-password" required>
-            </div>
-            <div class="form-actions">
-                <button onclick="signup()">Sign Up</button>
+        <input class="signup-input" type="text" id="username" placeholder="First Name">
+        <input class="signup-input" type="text" id="lastname" placeholder="Last Name">
+        <input class="signup-input" type="email" id="email" placeholder="Email">
+        <input class="signup-input" type="password" id="password" placeholder="Password">
+        <input class="signup-input" type="password" id="repeatpass" placeholder="Repeat Password">
+        <button class="signup-button" onclick="signup()">Sign Up</button>
 
-            </div>
-        </form>
+
     </div>
-
-    <!-- Add Firebase JavaScript SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js"></script>
     <script type="text/javascript">
-        // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBXLAsW25U1pWO395m8BrdJDSKyNIr5Ifo",
             authDomain: "hacthonproject-fe319.firebaseapp.com",
@@ -192,50 +153,60 @@
             appId: "1:1014200645705:web:c5002e1f1d2e3376f56798",
             measurementId: "G-5S1DVXRXDN"
         };
-
-
+        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
+        // Initialize Realtime Database and get a reference to the service
         const database = firebase.database();
 
-        const signup = () => {
-            let firstname = document.getElementById('firstname').value;
+        var signup = () => {
+            let username = document.getElementById('username').value;
             let lastname = document.getElementById('lastname').value;
             let email = document.getElementById('email').value;
             let password = document.getElementById('password').value;
-            let role = 'User'
+            let repeatpass = document.getElementById('repeatpass').value;
+            let role = 'User';
 
-            console.log(email, password)
+            console.log(email, password);
             firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     let user = userCredential.user;
+
+
                     firebase.database().ref('users/' + user.uid).set({
                         uid: user.uid,
-                        firstname: firstname,
+                        username: username,
                         role: role,
                         lastname: lastname,
                         email: email,
-                        password: password
+                        password: password,
+                        repeatpass: repeatpass
                     })
                         .then(() => {
                             const user = { email: email };
                             sessionStorage.setItem('user', JSON.stringify(user));
-                            console.log('User created successfully.')
-                            window.location.href = './Dashboard.html'
+                            console.log('User created successfully.');
+                            window.location.href = './Dashboard.html';
+
                         })
                         .catch((error) => {
                             console.log(error);
-                        })
+                        });
                 })
                 .catch((error) => {
                     let errorCode = error.code;
                     let errorMessage = error.message;
-                    console.log(errorCode + ': ' + errorMessage)
+                    console.log(errorCode + ': ' + errorMessage);
                 });
+        };
+        // Function to display the username
+        function displayUsername(uid) {
+            firebase.database().ref('users/' + uid).once('value').then(function (snapshot) {
+                var username = snapshot.val().username;
+                document.getElementById("nav-user").textContent = "Welcome, " + username + "!";
+            });
         }
 
-
     </script>
-
 </body>
 
 </html>

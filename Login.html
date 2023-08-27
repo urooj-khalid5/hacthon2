@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Login</title>
     <meta charset="UTF-8">
@@ -59,6 +60,7 @@
             margin: 40px auto;
             padding: 0 20px;
         }
+
         * {
             margin: 0;
             padding: 0;
@@ -127,12 +129,14 @@
             border: none;
             border-radius: 3px;
             cursor: pointer;
+            margin-left: 140px;
         }
 
         .form-actions button:hover {
             background-color: #4f0f52;
         }
-        .form-input input:focus{
+
+        .form-input input:focus {
             outline: none;
             border-color: #4f0f52;
             box-shadow: 0 0 3px rgb(105, 5, 100);
@@ -140,6 +144,7 @@
     </style>
     <title>Login</title>
 </head>
+
 <body>
     <nav class="navbar">
         <a href="#" class="logo">Personal Blogging App</a>
@@ -156,65 +161,57 @@
             <div class="form-input">
                 <input type="password" placeholder="Password" name="password" required>
             </div>
-            <div class="form-actions">
-                <button onclick="Login()">Login</button>
-                
-            </div>
+            
         </form>
-    </div>    
-        <!-- Add Firebase JavaScript SDK -->
-        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js"></script>
-        <script type="text/javascript">
-            // Your web app's Firebase configuration
-            const firebaseConfig = {
-    apiKey: "AIzaSyBXLAsW25U1pWO395m8BrdJDSKyNIr5Ifo",
-    authDomain: "hacthonproject-fe319.firebaseapp.com",
-    databaseURL: "https://hacthonproject-fe319-default-rtdb.firebaseio.com",
-    projectId: "hacthonproject-fe319",
-    storageBucket: "hacthonproject-fe319.appspot.com",
-    messagingSenderId: "1014200645705",
-    appId: "1:1014200645705:web:c5002e1f1d2e3376f56798",
-    measurementId: "G-5S1DVXRXDN"
-  };
-    
-    
-             firebase.initializeApp(firebaseConfig);
-    const database=firebase.database();
-    
-    const Login = () => {
-        let email = document.getElementById('email').value;
-        let password = document.getElementById('password').value;
-        let role = 'User'
-    
-        console.log(email, password)
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        <div class="form-actions">
+            <button onclick="Login()">Login</button>
+
+        </div>
+    </div>
+    <!-- Add Firebase JavaScript SDK -->
+   <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+ 
+   <script type="text/javascript">
+   const firebaseConfig = {
+            apiKey: "AIzaSyBXLAsW25U1pWO395m8BrdJDSKyNIr5Ifo",
+            authDomain: "hacthonproject-fe319.firebaseapp.com",
+            databaseURL: "https://hacthonproject-fe319-default-rtdb.firebaseio.com",
+            projectId: "hacthonproject-fe319",
+            storageBucket: "hacthonproject-fe319.appspot.com",
+            messagingSenderId: "1014200645705",
+            appId: "1:1014200645705:web:c5002e1f1d2e3376f56798",
+            measurementId: "G-5S1DVXRXDN"
+        };
+   // Initialize Firebase
+   firebase.initializeApp(firebaseConfig);
+    // Initialize Realtime Database and get a 
+    function logIn() {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                let user = userCredential.user;
-                firebase.database().ref('users/' + user.uid).set({
-                    uid: user.uid,
-                    role: role,
-                    email: email,
-                    password: password
-                })
-                    .then(() => {
-                        const user = { email: email };
-                        sessionStorage.setItem('user', JSON.stringify(user));
-                        console.log('User created successfully.')
-                        window.location.href = './Dashboard.html'
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    })
+                    var user = userCredential.user;
+                    console.log('User signed in successfully... \n', user);
+                    window.location.href = './Dasboard.html';
+
             })
             .catch((error) => {
-                let errorCode = error.code;
-                let errorMessage = error.message;
-                console.log(errorCode + ': ' + errorMessage)
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log("Login error:", errorCode, errorMessage);
             });
     }
-        </script>
-    
+
+    function writeUserData(userId, email, password) {
+      firebase.database().ref('users/' + userId).set({
+        userId: userId,
+        email: email,
+        password: password
+      });
+    }
+   </script>
 </body>
+
 </html>
